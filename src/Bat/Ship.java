@@ -10,7 +10,7 @@ public class Ship {
 		this.state = quantity;
 	}
 
-	void shipInit(int x, int y, int x1, int y1) { //заполняем по сетке 10х10 корабль по месту без проверок
+	void shipInit(int x, int y, int x1, int y1, char[][] gridBuzzy) { //заполняем по сетке 10х10 корабль по месту без проверок
 		if (x == x1) {
 			for (int i = y; i <= y1; i++) {
 				ship[x - 1][i - 1] = 'O';
@@ -19,6 +19,11 @@ public class Ship {
 		if (y == y1) {
 			for (int j = x; j <= x1; j++) {
 				ship[j - 1][y - 1] = 'O';
+			}
+		}
+		for (int i = x - 2; i <= x1; i++) {
+			for (int j = y - 2; j <= y1; j++) {
+				if (i >= 0 && j >= 0 && i <= 9 && j <= 9) gridBuzzy[i][j] = 'o';
 			}
 		}
 	}
@@ -45,5 +50,6 @@ public class Ship {
 		}
 		return grid;
 	}
+
 }
 

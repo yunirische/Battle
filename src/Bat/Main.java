@@ -14,6 +14,7 @@ public class Main {
 //		game.cruiser.shipPrint();
 //		game.destroyer.shipPrint();
 		game.gridPrint();
+		game.setGridBuzzyPrint();
 
 	}
 }
