@@ -13,19 +13,25 @@ public class Game {
 	}
 
 	Ship aircraftCarrier = new Ship(5);
-	Ship aircraftCarrierDouble = new Ship(5);
+	Ship battleship = new Ship(4);
+	Ship submarine = new Ship(3);
+	Ship cruiser = new Ship(3);
+	Ship destroyer = new Ship(2);
+
 
 	public void initShipS() {
-		aircraftCarrier.shipInit(1,2,1,7);
-		aircraftCarrier.shipPrint();
-		aircraftCarrierDouble.shipInit(3,3,8,3);
-		aircraftCarrierDouble.shipPrint();
-	}
-	/*	Ship battleship = new Ship(4);
-		Ship submarine = new Ship(3);
-		Ship cruiser = new Ship(3);
-		Ship destroyer = new Ship(2);*/
+		aircraftCarrier.shipInit(1, 2, 1, 7);
+		aircraftCarrier.merge(grid, aircraftCarrier.ship);
+		battleship.shipInit(5, 1, 5, 5);
+		battleship.merge(grid, battleship.ship);
+		submarine.shipInit(7, 7, 7, 10);
+		submarine.merge(grid, submarine.ship);
+		cruiser.shipInit(9, 6, 9, 9);
+		cruiser.merge(grid, cruiser.ship);
+		destroyer.shipInit(10, 1, 10, 2);
+		destroyer.merge(grid, destroyer.ship);
 
+	}
 
 	public void gridPrint() {
 		System.out.println("  1 2 3 4 5 6 7 8 9 10");

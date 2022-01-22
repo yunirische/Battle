@@ -13,12 +13,12 @@ public class Ship {
 	void shipInit(int x, int y, int x1, int y1) { //заполняем по сетке 10х10 корабль по месту без проверок
 		if (x == x1) {
 			for (int i = y; i <= y1; i++) {
-				ship[x][i] = 'O';
+				ship[x - 1][i - 1] = 'O';
 			}
 		}
 		if (y == y1) {
 			for (int j = x; j <= x1; j++) {
-				ship[j][y] = 'O';
+				ship[j - 1][y - 1] = 'O';
 			}
 		}
 	}
@@ -34,6 +34,16 @@ public class Ship {
 			}
 			System.out.println();
 		}
+	}
+
+	public char[][] merge(char[][] grid, char[][] ship) {
+		System.out.println("Совмещаем сетку и корабль");
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (ship[i][j] == 'O') grid[i][j] = 'O';
+			}
+		}
+		return grid;
 	}
 }
 
