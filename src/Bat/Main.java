@@ -10,6 +10,7 @@ public class Main {
 
 		game.initShipS();
 		game.gridPrint();
+		game.setGridBuzzyPrint();
 
 		game.setGridBuzzyPrint();
 
