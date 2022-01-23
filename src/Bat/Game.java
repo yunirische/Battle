@@ -1,6 +1,6 @@
 package Bat;
 
-import java.util.Scanner;
+import static Bat.Main.inputBoat;
 
 public class Game {
 
@@ -24,27 +24,24 @@ public class Game {
 
 
 	public void initShipS() {
-//		int x = 0;
-//		int y = 0;
-//		int x1 = 0;
-//		int y1 = 0;
-		int [] coord = aircraftCarrier.inputBoat("AircraftCarrier", aircraftCarrier.quantity);
+
+		int[] coord = inputBoat("AircraftCarrier", aircraftCarrier.quantity);
 		aircraftCarrier.shipInit(coord[0], coord[1], coord[2], coord[3], gridBuzzy);
 		aircraftCarrier.merge(grid, aircraftCarrier.ship);
 
-		int [] coord1 = battleship.inputBoat("Battleship", battleship.quantity);
+		int[] coord1 = inputBoat("Battleship", battleship.quantity);
 		battleship.shipInit(coord1[0], coord1[1], coord1[2], coord1[3], gridBuzzy);
 		battleship.merge(grid, battleship.ship);
 
-		int [] coord2 = submarine.inputBoat("Submarine", submarine.quantity);
+		int[] coord2 = inputBoat("Submarine", submarine.quantity);
 		submarine.shipInit(coord2[0], coord2[1], coord2[2], coord2[3], gridBuzzy);
 		submarine.merge(grid, submarine.ship);
 
-		int [] coord3 = cruiser.inputBoat("Cruiser", cruiser.quantity);
+		int[] coord3 = inputBoat("Cruiser", cruiser.quantity);
 		cruiser.shipInit(coord3[0], coord3[1], coord3[2], coord3[3], gridBuzzy);
 		cruiser.merge(grid, cruiser.ship);
 
-		int [] coord4 = destroyer.inputBoat("Destroyer", destroyer.quantity);
+		int[] coord4 = inputBoat("Destroyer", destroyer.quantity);
 		destroyer.shipInit(coord4[0], coord4[1], coord4[2], coord4[3], gridBuzzy);
 		destroyer.merge(grid, destroyer.ship);
 
@@ -75,50 +72,5 @@ public class Game {
 			}
 			System.out.println();
 		}
-	}
-
-//	public int[] inputBoat(String s, int q) {
-//		Scanner scanner = new Scanner(System.in);
-//		int[] coord = new int[] {1, 2, 1, 6};
-//		int quantity = q;
-//		String name = s;
-//		System.out.println("Input coordinate " + name + ", quantity - " + q + ", A - J, 1-10 ");
-//		//		while (sc.hasNext()) {
-////			String move1 = sc.nextLine().replace(" ", "");
-////			try {
-////				int x = Integer.parseInt(String.valueOf(move1.charAt(0)));
-////				int y = Integer.parseInt(String.valueOf(move1.charAt(1)));
-////				boolean res = grid.stepX(x, y);
-////				if (res) {
-////					grid.print();
-////					answer = grid.check();
-////					break;
-////				}
-////
-////			} catch (Exception e) {
-////				System.out.println("Exception " + e.getMessage() + "\n");
-////			}
-//		return coord;
-//	}
-
-
-	public void shoot() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Shoot A-J, 1-10");
-//		while (sc.hasNext()) {
-//			String move1 = sc.nextLine().replace(" ", "");
-//			try {
-//				int x = Integer.parseInt(String.valueOf(move1.charAt(0)));
-//				int y = Integer.parseInt(String.valueOf(move1.charAt(1)));
-//				boolean res = grid.stepX(x, y);
-//				if (res) {
-//					grid.print();
-//					answer = grid.check();
-//					break;
-//				}
-//
-//			} catch (Exception e) {
-//				System.out.println("Exception " + e.getMessage() + "\n");
-//			}
 	}
 }
