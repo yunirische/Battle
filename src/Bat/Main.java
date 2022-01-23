@@ -11,16 +11,20 @@ public class Main {
 		game.gridPrint();
 
 		game.initShipS();
-		game.gridPrint();
 		game.setGridBuzzyPrint();
 	}
 
-	static int[] inputBoat(String s, int q) {
+	static int[] inputBoat(String name, int quantity) {
 		Scanner scanner = new Scanner(System.in);
-		int[] coord = new int[]{1, 2, 1, 6};
-		int quantity = q;
-		String name = s;
-		System.out.println("Input coordinate " + name + ", quantity - " + q + ", A - J, 1-10 ");
+		int[] coord = new int[4];
+		System.out.println("Input coordinate " + name + ", quantity - " + quantity + ", A - J, 1-10 \n две строки цифры x y через пробел");
+		String inpLine = scanner.nextLine().replace(" ", "");
+		String inpLine1 = scanner.nextLine().replace(" ", "");
+		coord[0] = Integer.parseInt(String.valueOf(inpLine.charAt(0)));
+		coord[1] = Integer.parseInt(String.valueOf(inpLine.charAt(1)));
+		coord[2] = Integer.parseInt(String.valueOf(inpLine1.charAt(0)));
+		coord[3] = Integer.parseInt(String.valueOf(inpLine1.charAt(1)));
+
 		//		while (sc.hasNext()) {
 //			String move1 = sc.nextLine().replace(" ", "");
 //			try {
