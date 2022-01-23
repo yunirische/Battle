@@ -3,7 +3,7 @@ package Bat;
 import java.util.Scanner;
 
 public class Ship {
-	private final int quantity; // количество труб
+	final int quantity; // количество труб
 	private int state; // статус просто цифра = труб, сравниваем м/у 0 и quantity
 	char[][] ship = new char[10][10]; // пустая сетка с расположением коробля для консоли
 

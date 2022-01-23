@@ -28,23 +28,23 @@ public class Game {
 //		int y = 0;
 //		int x1 = 0;
 //		int y1 = 0;
-		int [] coord = battleship.inputBoat("AircraftCarrier", 5);
+		int [] coord = aircraftCarrier.inputBoat("AircraftCarrier", aircraftCarrier.quantity);
 		aircraftCarrier.shipInit(coord[0], coord[1], coord[2], coord[3], gridBuzzy);
 		aircraftCarrier.merge(grid, aircraftCarrier.ship);
 
-		int [] coord1 = battleship.inputBoat("Battleship", 4);
+		int [] coord1 = battleship.inputBoat("Battleship", battleship.quantity);
 		battleship.shipInit(coord1[0], coord1[1], coord1[2], coord1[3], gridBuzzy);
 		battleship.merge(grid, battleship.ship);
 
-		int [] coord2 = battleship.inputBoat("Submarine", 3);
+		int [] coord2 = submarine.inputBoat("Submarine", submarine.quantity);
 		submarine.shipInit(coord2[0], coord2[1], coord2[2], coord2[3], gridBuzzy);
 		submarine.merge(grid, submarine.ship);
 
-		int [] coord3 = battleship.inputBoat("Cruiser", 3);
+		int [] coord3 = cruiser.inputBoat("Cruiser", cruiser.quantity);
 		cruiser.shipInit(coord3[0], coord3[1], coord3[2], coord3[3], gridBuzzy);
 		cruiser.merge(grid, cruiser.ship);
 
-		int [] coord4 = battleship.inputBoat("Destroyer", 2);
+		int [] coord4 = destroyer.inputBoat("Destroyer", destroyer.quantity);
 		destroyer.shipInit(coord4[0], coord4[1], coord4[2], coord4[3], gridBuzzy);
 		destroyer.merge(grid, destroyer.ship);
 
