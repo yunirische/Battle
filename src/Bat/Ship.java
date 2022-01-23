@@ -42,7 +42,7 @@ public class Ship {
 	}
 
 	public char[][] merge(char[][] grid, char[][] ship) {
-		System.out.println("Совмещаем сетку и корабль");
+		//System.out.println("Совмещаем сетку и корабль");
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				if (ship[i][j] == 'O') {

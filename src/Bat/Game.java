@@ -1,4 +1,5 @@
 package Bat;
+
 import java.util.Scanner;
 
 public class Game {
@@ -23,15 +24,28 @@ public class Game {
 
 
 	public void initShipS() {
-		aircraftCarrier.shipInit(1, 2, 1, 6, gridBuzzy);
+//		int x = 0;
+//		int y = 0;
+//		int x1 = 0;
+//		int y1 = 0;
+		int [] coord = inputBoat("AircraftCarrier", 5);
+		aircraftCarrier.shipInit(coord[0], coord[1], coord[2], coord[3], gridBuzzy);
 		aircraftCarrier.merge(grid, aircraftCarrier.ship);
-		battleship.shipInit(5, 1, 5, 4, gridBuzzy);
+
+		int [] coord1 = inputBoat("Battleship", 4);
+		battleship.shipInit(coord1[0], coord1[1], coord1[2], coord1[3], gridBuzzy);
 		battleship.merge(grid, battleship.ship);
-		submarine.shipInit(7, 8, 7, 10, gridBuzzy);
+
+		int [] coord2 = inputBoat("Submarine", 3);
+		submarine.shipInit(coord2[0], coord2[1], coord2[2], coord2[3], gridBuzzy);
 		submarine.merge(grid, submarine.ship);
-		cruiser.shipInit(9, 7, 9, 9, gridBuzzy);
+
+		int [] coord3 = inputBoat("Cruiser", 3);
+		cruiser.shipInit(coord3[0], coord3[1], coord3[2], coord3[3], gridBuzzy);
 		cruiser.merge(grid, cruiser.ship);
-		destroyer.shipInit(10, 1, 10, 2, gridBuzzy);
+
+		int [] coord4 = inputBoat("Destroyer", 2);
+		destroyer.shipInit(coord4[0], coord4[1], coord4[2], coord4[3], gridBuzzy);
 		destroyer.merge(grid, destroyer.ship);
 
 	}
@@ -62,6 +76,31 @@ public class Game {
 			System.out.println();
 		}
 	}
+
+	public int[] inputBoat(String s, int q) {
+		Scanner scanner = new Scanner(System.in);
+		int[] coord = new int[] {1, 2, 1, 6};
+		int quantity = q;
+		String name = s;
+		System.out.println("Input coordinate " + name + ", quantity - " + q + ", A - J, 1-10 ");
+		//		while (sc.hasNext()) {
+//			String move1 = sc.nextLine().replace(" ", "");
+//			try {
+//				int x = Integer.parseInt(String.valueOf(move1.charAt(0)));
+//				int y = Integer.parseInt(String.valueOf(move1.charAt(1)));
+//				boolean res = grid.stepX(x, y);
+//				if (res) {
+//					grid.print();
+//					answer = grid.check();
+//					break;
+//				}
+//
+//			} catch (Exception e) {
+//				System.out.println("Exception " + e.getMessage() + "\n");
+//			}
+		return coord;
+	}
+
 
 	public void shoot() {
 		Scanner scanner = new Scanner(System.in);

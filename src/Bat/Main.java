@@ -12,7 +12,5 @@ public class Main {
 		game.gridPrint();
 		game.setGridBuzzyPrint();
 
-		game.setGridBuzzyPrint();
-
 	}
 }
