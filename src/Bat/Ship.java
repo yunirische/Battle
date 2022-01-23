@@ -1,7 +1,5 @@
 package Bat;
 
-import java.util.Scanner;
-
 public class Ship {
 	final int quantity; // количество труб
 	private int state; // статус просто цифра = труб, сравниваем м/у 0 и quantity
@@ -54,8 +52,6 @@ public class Ship {
 		}
 		return grid;
 	}
-
-
 }
 
 

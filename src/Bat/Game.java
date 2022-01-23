@@ -78,4 +78,9 @@ public class Game {
 			System.out.println();
 		}
 	}
+
+	public boolean checkCoord(char[] coord) {
+		boolean res = false;
+		return res;
+	}
 }
