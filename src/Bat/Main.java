@@ -1,11 +1,10 @@
 package Bat;
 
 import java.util.Scanner;
-
 public class Main {
+	static Game game;
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		Game game = new Game();
+		game = new Game();
 		game.gridInit(); // основное рабочее поле
 		game.gridPrint();
 
@@ -26,10 +25,9 @@ public class Main {
 			coord[2] = Integer.parseInt(String.valueOf(inpLine1.charAt(0)));
 			coord[3] = Integer.parseInt(String.valueOf(inpLine1.charAt(1)));
 			boolean res = false;
-			res = ??????checkCoord(coord[]);
+			res = Game.checkCoord(coord);
 			if (res) {
-				//grid.print();
-				break;
+				game.gridPrint();
 			}
 
 		} catch (Exception e) {
@@ -37,6 +35,11 @@ public class Main {
 		}
 		return coord;
 	}
+
+//	static boolean checkCoord(char[] coord) {
+//		boolean res = false;
+//		return res;
+//	}
 
 	public void shoot() {
 		Scanner scanner = new Scanner(System.in);

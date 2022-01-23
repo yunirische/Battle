@@ -79,7 +79,7 @@ public class Game {
 		}
 	}
 
-	public boolean checkCoord(char[] coord) {
+	static boolean checkCoord(int[] coord) {
 		boolean res = false;
 		return res;
 	}
