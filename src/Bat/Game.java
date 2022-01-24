@@ -1,6 +1,7 @@
 package Bat;
 
 import static Bat.Main.inputBoat;
+import static Bat.Main.ship;
 
 public class Game {
 
@@ -16,39 +17,39 @@ public class Game {
 		}
 	}
 
-	Ship aircraftCarrier = new Ship(5);
-	Ship battleship = new Ship(4);
-	Ship submarine = new Ship(3);
-	Ship cruiser = new Ship(3);
-	Ship destroyer = new Ship(2);
+	Ship aircraftCarrier = new Ship("aircraftCarrier",5);
+	Ship battleship = new Ship("battleship",4);
+	Ship submarine = new Ship("submarine",3);
+	Ship cruiser = new Ship("cruiser",3);
+	Ship destroyer = new Ship("destroyer",2);
 
 
-	public void initShipS() {
+	public void initShipS(int x,int y, int x1, int y1) {
 
-		int[] coord = inputBoat("AircraftCarrier", aircraftCarrier.quantity);
-		aircraftCarrier.shipInit(coord[0], coord[1], coord[2], coord[3], gridBuzzy);
-		aircraftCarrier.merge(grid, aircraftCarrier.ship);
+		//int[] coord = inputBoat("AircraftCarrier", aircraftCarrier.quantity);
+		ship.shipInit(x, y, x1, y1, gridBuzzy);
+		ship.merge(grid, aircraftCarrier.ship);
 		gridPrint();
 
-		int[] coord1 = inputBoat("Battleship", battleship.quantity);
-		battleship.shipInit(coord1[0], coord1[1], coord1[2], coord1[3], gridBuzzy);
-		battleship.merge(grid, battleship.ship);
-		gridPrint();
+		//int[] coord1 = inputBoat("Battleship", battleship.quantity);
+		//battleship.shipInit(coord1[0], coord1[1], coord1[2], coord1[3], gridBuzzy);
+//		battleship.merge(grid, battleship.ship);
+		//gridPrint();
 
-		int[] coord2 = inputBoat("Submarine", submarine.quantity);
-		submarine.shipInit(coord2[0], coord2[1], coord2[2], coord2[3], gridBuzzy);
-		submarine.merge(grid, submarine.ship);
-		gridPrint();
+		//int[] coord2 = inputBoat("Submarine", submarine.quantity);
+		//submarine.shipInit(coord2[0], coord2[1], coord2[2], coord2[3], gridBuzzy);
+//		submarine.merge(grid, submarine.ship);
+		//gridPrint();
 
-		int[] coord3 = inputBoat("Cruiser", cruiser.quantity);
-		cruiser.shipInit(coord3[0], coord3[1], coord3[2], coord3[3], gridBuzzy);
-		cruiser.merge(grid, cruiser.ship);
-		gridPrint();
+		//int[] coord3 = inputBoat("Cruiser", cruiser.quantity);
+		//cruiser.shipInit(coord3[0], coord3[1], coord3[2], coord3[3], gridBuzzy);
+//		cruiser.merge(grid, cruiser.ship);
+		//gridPrint();
 
-		int[] coord4 = inputBoat("Destroyer", destroyer.quantity);
-		destroyer.shipInit(coord4[0], coord4[1], coord4[2], coord4[3], gridBuzzy);
-		destroyer.merge(grid, destroyer.ship);
-		gridPrint();
+		//int[] coord4 = inputBoat("Destroyer", destroyer.quantity);
+		//destroyer.shipInit(coord4[0], coord4[1], coord4[2], coord4[3], gridBuzzy);
+//		destroyer.merge(grid, destroyer.ship);
+		//gridPrint();
 
 	}
 

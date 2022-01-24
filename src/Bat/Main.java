@@ -3,12 +3,19 @@ package Bat;
 import java.util.Scanner;
 public class Main {
 	static Game game;
+	static Ship ship;
 	public static void main(String[] args) {
 		game = new Game();
 		game.gridInit(); // основное рабочее поле
 		game.gridPrint();
 
-		game.initShipS();
+		//game.initShipS();
+		inputBoat(game.aircraftCarrier.name, game.aircraftCarrier.quantity);
+		inputBoat(game.battleship.name, game.battleship.quantity);
+		inputBoat(game.submarine.name, game.submarine.quantity);
+		inputBoat(game.cruiser.name, game.cruiser.quantity);
+		inputBoat(game.destroyer.name, game.destroyer.quantity);
+
 		game.setGridBuzzyPrint();
 	}
 
@@ -27,7 +34,7 @@ public class Main {
 			boolean res = false;
 			res = Game.checkCoord(coord);
 			if (res) {
-				game.gridPrint();
+				game.initShipS(coord[0], coord[1], coord[2], coord[3]);
 			}
 
 		} catch (Exception e) {

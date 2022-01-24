@@ -1,16 +1,19 @@
 package Bat;
 
 public class Ship {
+	String name;
 	final int quantity; // количество труб
 	private int state; // статус просто цифра = труб, сравниваем м/у 0 и quantity
 	char[][] ship = new char[10][10]; // пустая сетка с расположением коробля для консоли
 
-	Ship(int quantity) {
+	Ship(String name, int quantity) {
 		this.quantity = quantity;
 		this.state = quantity;
+		this.name = name;
 	}
 
 	void shipInit(int x, int y, int x1, int y1, char[][] gridBuzzy) { //заполняем по сетке 10х10 корабль по месту без проверок
+		this.name = name;
 		if (x == x1) {
 			for (int i = y; i <= y1; i++) {
 				ship[x - 1][i - 1] = 'O';
