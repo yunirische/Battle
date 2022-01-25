@@ -1,12 +1,15 @@
 package Bat;
 
-import static Bat.Main.inputBoat;
+//import static Bat.Main.inputBoat;
+//import static Bat.Main.ship;
+
 import static Bat.Main.ship;
 
 public class Game {
 
 	char[][] grid = new char[10][10];
 	char[][] gridBuzzy = new char[10][10];
+
 
 	public void gridInit() {
 		for (int i = 0; i < 10; i++) {
@@ -17,19 +20,12 @@ public class Game {
 		}
 	}
 
-	Ship aircraftCarrier = new Ship("aircraftCarrier",5);
-	Ship battleship = new Ship("battleship",4);
-	Ship submarine = new Ship("submarine",3);
-	Ship cruiser = new Ship("cruiser",3);
-	Ship destroyer = new Ship("destroyer",2);
-
-
-	public void initShipS(int x,int y, int x1, int y1) {
-
+	public void initShipS(String name, int quantity, int x, int y, int x1, int y1) {
+		Ship.ship name = new Ship( quantity, x, y, x1, y1);
 		//int[] coord = inputBoat("AircraftCarrier", aircraftCarrier.quantity);
-		ship.shipInit(x, y, x1, y1, gridBuzzy);
-		ship.merge(grid, aircraftCarrier.ship);
-		gridPrint();
+		//ship.shipInit(x, y, x1, y1, grid);
+		//ship.merge(grid, aircraftCarrier.ship);
+		//gridPrint();
 
 		//int[] coord1 = inputBoat("Battleship", battleship.quantity);
 		//battleship.shipInit(coord1[0], coord1[1], coord1[2], coord1[3], gridBuzzy);
@@ -53,7 +49,8 @@ public class Game {
 
 	}
 
-	public void gridPrint() {
+	public void gridPrint(char[][] grid) {
+		this.grid = grid;
 		System.out.println("  1 2 3 4 5 6 7 8 9 10");
 		System.out.println("  ____________________");
 		String str = ("ABCDEFGHIJ");
@@ -66,7 +63,7 @@ public class Game {
 		}
 	}
 
-	public void setGridBuzzyPrint() { // Для проверки сетки занято, затем удалить этот метод
+	public void GridBuzzyPrint() { // Для проверки сетки занято, затем удалить этот метод
 		System.out.println("\nЗанятые поля");
 		System.out.println("  1 2 3 4 5 6 7 8 9 10");
 		System.out.println("  ____________________");
@@ -81,7 +78,7 @@ public class Game {
 	}
 
 	static boolean checkCoord(int[] coord) {
-		boolean res = false;
+		boolean res = true;
 		return res;
 	}
 }
