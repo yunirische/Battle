@@ -9,7 +9,8 @@ public class Game {
 
 	char[][] grid = new char[10][10];
 	char[][] gridBuzzy = new char[10][10];
-
+	Ship[] ships = new Ship[5];
+	int index = 0;
 
 	public void gridInit() {
 		for (int i = 0; i < 10; i++) {
@@ -20,8 +21,20 @@ public class Game {
 		}
 	}
 
+	public Ship getShip(String name){
+		Ship res = null;
+		for (int i = 0; i < this.ships.length; i++){
+			if (this.ships[i].name == name){
+				return this.ships[i];
+			}
+		}
+		return res;
+	}
+
 	public void initShipS(String name, int quantity, int x, int y, int x1, int y1) {
-		Ship.ship name = new Ship( quantity, x, y, x1, y1);
+		ships[index] = new Ship(name, quantity, x, y, x1, y1);
+		index++;
+
 		//int[] coord = inputBoat("AircraftCarrier", aircraftCarrier.quantity);
 		//ship.shipInit(x, y, x1, y1, grid);
 		//ship.merge(grid, aircraftCarrier.ship);

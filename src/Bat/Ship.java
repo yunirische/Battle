@@ -6,7 +6,7 @@ public class Ship {
 	private int state; // статус просто цифра = труб, сравниваем м/у 0 и quantity
 	char[][] ship = new char[10][10]; // пустая сетка с расположением коробля для консоли
 
-	Ship( int quantity, int x, int y, int x1, int y1) {
+	Ship(String name, int quantity, int x, int y, int x1, int y1) {
 		this.quantity = quantity;
 		this.state = quantity;
 		this.name = name;
