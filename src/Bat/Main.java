@@ -1,5 +1,4 @@
 package Bat;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
@@ -13,8 +12,11 @@ public class Main {
 	public static void main(String[] args) {
 		game = new Game();
 		game.gridInit(); // основное рабочее поле
+		System.out.println("grid");
 		game.gridPrint(game.grid);
+		System.out.println("gridBuzzy");
 		game.gridPrint(game.gridBuzzy);
+
 		String[] name = new String[]{"aircraftCarrier", "battleship", "submarine", "cruiser", "destroyer"};
 		int[] quantity = new int[]{5, 4, 3, 3, 2};
 
@@ -38,8 +40,16 @@ public class Main {
 			boolean res = true;
 			res = Game.checkCoord(coord);
 			if (res) {
+				System.out.println("initShipS");
 				game.initShipS(name, quantity, coord[0], coord[1], coord[2], coord[3]);
-				
+
+
+				System.out.println("grid");
+				game.gridPrint(game.grid);
+
+				System.out.println("gridBuzzy");
+				game.gridPrint(game.gridBuzzy);
+
 			}
 
 		} catch (Exception e) {
@@ -47,30 +57,6 @@ public class Main {
 		}
 		return coord;
 	}
-//
-////	static boolean checkCoord(char[] coord) {
-////		boolean res = false;
-////		return res;
-////	}
-//
-//	public void shoot() {
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("Shoot A-J, 1-10");
-////		while (sc.hasNext()) {
-////			String move1 = sc.nextLine().replace(" ", "");
-////			try {
-////				int x = Integer.parseInt(String.valueOf(move1.charAt(0)));
-////				int y = Integer.parseInt(String.valueOf(move1.charAt(1)));
-////				boolean res = grid.stepX(x, y);
-////				if (res) {
-////					grid.print();
-////					answer = grid.check();
-////					break;
-////				}
-////
-////			} catch (Exception e) {
-////				System.out.println("Exception " + e.getMessage() + "\n");
-////			}
 }
 
 
