@@ -100,5 +100,32 @@ public class Game {
 
 		return true;
 	}
+	public static String getCoordinatesWords (String str) {
+
+		String strDigit = str.replaceAll("[0-9]", "");
+		strDigit = strDigit.replaceAll("\\s+", " ");
+		//System.out.println(strDigit + "\n");
+		return strDigit;
+	}
+
+	public static String[] getCoordinatesDigits (String str) {
+
+		String strWords = str.replaceAll("[A-Za-z]", " ");
+		strWords = strWords.replaceAll("\\s+", " ");
+		//System.out.println(strWords + "\n");
+		String[] arr = strWords.split("\\s");
+//		for (String word: arr) {
+			System.out.println("arr length - " + arr.length);
+//		}
+		return arr;
+	}
+
+//	static void strToArrCoord (String string) {
+//
+//		String[] arr = string.split("\\s");
+//		for (String word: arr) {
+//			System.out.println(word);
+//		}
+	//}
 }
 

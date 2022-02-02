@@ -4,6 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Scanner;
 
+import static java.util.Collections.replaceAll;
+
 public class Main {
 	static Game game;
 	static Ship ship;
@@ -38,16 +40,22 @@ public class Main {
 				if (name == "AircraftCarrier") name = "Aircraft Carrier";
 				System.out.println("Enter the coordinates of the " + name + "(" + quantity + " cells):");
 				String inpLine = scanner.nextLine().replace(" ", "");
-//				String inpLine1 = inpLine.replace("\\d", " ");
-//				String[] arrayFromString = inpLine.split(" ");
-//				for (int i = 0; i < arrayFromString.length; i++) {
-//					System.out.println(arrayFromString[i]);
-//				}
 
-				coord[0] = game.StrToIntCoor(inpLine.charAt(0));
-				coord[1] = Integer.parseInt(String.valueOf(inpLine.charAt(1)));
-				coord[2] = game.StrToIntCoor(inpLine.charAt(2));
-				coord[3] = Integer.parseInt(String.valueOf(inpLine.charAt(3)));
+				String words = Game.getCoordinatesWords(inpLine);
+				System.out.println("1" + words);
+				String[] digits = Game.getCoordinatesDigits(inpLine);
+				System.out.println("d" + digits);
+
+				coord[0] = game.StrToIntCoor(words.charAt(0));
+				System.out.println("coor0 - " + coord[0] + ", words.charat 0 - " + words.charAt(0));
+				coord[1] = Integer.parseInt(digits[0]);
+				System.out.println("coor1 - " + coord[1] + ", dig.charat 0 - " + digits[0]);
+				coord[2] = game.StrToIntCoor(words.charAt(1));
+				System.out.println("coor2 - " + coord[2] + ", words.charat 1 - " + words.charAt(1));
+				coord[3] = Integer.parseInt(digits[1]);
+				System.out.println("coor3 - " + coord[3] + ", dig.charat 1 - " + digits[1]);
+
+				System.out.println("coor" + coord[0] + coord[1] + coord[2] + coord[3]);
 
 				res = game.checkCoord(coord, quantity);
 				res1 = game.buzOrFree(coord[0], coord[1], coord[2], coord[3]);
@@ -72,6 +80,7 @@ public class Main {
 		}
 		return coord;
 	}
+
 }
 
 
