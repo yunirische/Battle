@@ -42,20 +42,13 @@ public class Main {
 				String inpLine = scanner.nextLine().replace(" ", "");
 
 				String words = Game.getCoordinatesWords(inpLine);
-				System.out.println("1" + words);
 				String[] digits = Game.getCoordinatesDigits(inpLine);
-				System.out.println("d" + digits);
 
 				coord[0] = game.StrToIntCoor(words.charAt(0));
-				System.out.println("coor0 - " + coord[0] + ", words.charat 0 - " + words.charAt(0));
 				coord[1] = Integer.parseInt(digits[0]);
-				System.out.println("coor1 - " + coord[1] + ", dig.charat 0 - " + digits[0]);
 				coord[2] = game.StrToIntCoor(words.charAt(1));
-				System.out.println("coor2 - " + coord[2] + ", words.charat 1 - " + words.charAt(1));
 				coord[3] = Integer.parseInt(digits[1]);
-				System.out.println("coor3 - " + coord[3] + ", dig.charat 1 - " + digits[1]);
 
-				System.out.println("coor" + coord[0] + coord[1] + coord[2] + coord[3]);
 
 				res = game.checkCoord(coord, quantity);
 				res1 = game.buzOrFree(coord[0], coord[1], coord[2], coord[3]);
@@ -63,12 +56,9 @@ public class Main {
 				if (coord[0] == 100 || coord[2] == 100) continue;
 
 				if (res && res1) {
-					//System.out.println("initShipS");
 					game.initShipS(name, quantity, coord[0], coord[1], coord[2], coord[3]);
 
-					//System.out.println("grid");
 					game.gridPrint(Game.grid);
-					//System.out.println("gridBuzzy");
 					game.gridPrint(Game.gridBuzzy);
 					break;
 

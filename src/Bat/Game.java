@@ -63,8 +63,7 @@ public class Game {
 				coord[0] += 1;
 				coord[2] += 1;
 				return true;
-			}
-			else System.out.println("Error! Wrong length of the Submarine! Try again:");
+			} else System.out.println("Error! Wrong length of the Submarine! Try again:");
 		}
 		System.out.println("Error! You placed it too close to another one. Try again:");
 		return false;
@@ -100,7 +99,8 @@ public class Game {
 
 		return true;
 	}
-	public static String getCoordinatesWords (String str) {
+
+	public static String getCoordinatesWords(String str) {
 
 		String strDigit = str.replaceAll("[0-9]", "");
 		strDigit = strDigit.replaceAll("\\s+", " ");
@@ -108,24 +108,14 @@ public class Game {
 		return strDigit;
 	}
 
-	public static String[] getCoordinatesDigits (String str) {
+	public static String[] getCoordinatesDigits(String str) {
 
 		String strWords = str.replaceAll("[A-Za-z]", " ");
-		strWords = strWords.replaceAll("\\s+", " ");
-		//System.out.println(strWords + "\n");
+		System.out.println(strWords);
+		strWords = strWords.replaceAll("\\s+", " ").trim();
+		System.out.println(strWords);
 		String[] arr = strWords.split("\\s");
-//		for (String word: arr) {
-			System.out.println("arr length - " + arr.length);
-//		}
 		return arr;
 	}
-
-//	static void strToArrCoord (String string) {
-//
-//		String[] arr = string.split("\\s");
-//		for (String word: arr) {
-//			System.out.println(word);
-//		}
-	//}
 }
 
