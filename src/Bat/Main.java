@@ -9,20 +9,18 @@ import static java.util.Collections.replaceAll;
 public class Main {
 	static Game game;
 	static Ship ship;
-	static String[] name = new String[]{"aircraftCarrier", "battleship", "submarine", "cruiser", "destroyer"};
-	static int[] quantity = new int[]{5, 4, 3, 3, 2};
+	static String[] name;
+	static int[] quantity;
 	static int id;
 
 	public static void main(String[] args) {
 		game = new Game();
 		game.gridInit(); // основное рабочее поле
-		//System.out.println("grid");
 		game.gridPrint(game.grid);
-		//System.out.println("gridBuzzy");
 		game.gridPrint(game.gridBuzzy);
 
-		String[] name = new String[]{"Aircraft_Carrier", "battleship", "submarine", "cruiser", "destroyer"};
-		int[] quantity = new int[]{5, 4, 3, 3, 2};
+		name = new String[]{"AircraftCarrier", "battleship", "submarine", "cruiser", "destroyer"};
+		quantity = new int[]{5, 4, 3, 3, 2};
 
 		for (id = 0; id < name.length; id++) {
 			inputBoat(name[id], quantity[id]); // начинаем инициализировать корабли по списку

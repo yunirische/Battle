@@ -40,10 +40,10 @@ public class Game {
 
 	public void gridPrint(char[][] gridX) {
 		System.out.println("   1 2 3 4 5 6 7 8 9 10");
-		System.out.println("  ____________________");
+//		System.out.println("  ____________________");
 		String str = ("ABCDEFGHIJ");
 		for (int i = 0; i < 10; i++) {
-			System.out.print(String.valueOf(str.charAt(i)) + "|");
+			System.out.print(String.valueOf(str.charAt(i)));
 			for (int j = 0; j < 10; j++) {
 				System.out.print(" " + gridX[i][j]);
 			}
@@ -63,7 +63,10 @@ public class Game {
 				coord[0] += 1;
 				coord[2] += 1;
 				return true;
-			} else System.out.println("Error! Wrong length of the Submarine! Try again:");
+			} else {
+				System.out.println("Error! Wrong length of the Submarine! Try again:");
+				return false;
+			}
 		}
 		System.out.println("Error! You placed it too close to another one. Try again:");
 		return false;
