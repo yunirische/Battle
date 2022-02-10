@@ -1,71 +1,74 @@
 package Bat;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
+
+import static java.util.Collections.replaceAll;
+
 public class Main {
 	static Game game;
 	static Ship ship;
+	static String[] name;
+	static int[] quantity;
+	static int id;
+
 	public static void main(String[] args) {
 		game = new Game();
 		game.gridInit(); // основное рабочее поле
-		game.gridPrint();
+		game.gridPrint(game.grid);
+		game.gridPrint(game.gridBuzzy);
 
-		//game.initShipS();
-		inputBoat(game.aircraftCarrier.name, game.aircraftCarrier.quantity);
-		inputBoat(game.battleship.name, game.battleship.quantity);
-		inputBoat(game.submarine.name, game.submarine.quantity);
-		inputBoat(game.cruiser.name, game.cruiser.quantity);
-		inputBoat(game.destroyer.name, game.destroyer.quantity);
+		name = new String[]{"AircraftCarrier", "battleship", "submarine", "cruiser", "destroyer"};
+		quantity = new int[]{5, 4, 3, 3, 2};
 
-		game.setGridBuzzyPrint();
+		for (id = 0; id < name.length; id++) {
+			inputBoat(name[id], quantity[id]); // начинаем инициализировать корабли по списку
+		}
 	}
 
-	static int[] inputBoat(String name, int quantity) {
+	static int @NotNull [] inputBoat(String name, int quantity) { // вводим координаты, проверяем и инициализируем корабль и сетку с ним
 		Scanner scanner = new Scanner(System.in);
 		int[] coord = new int[4];
+		boolean res = false;
+		boolean res1 = false;
 
 		try {
-			System.out.println("Input coordinate " + name + ", quantity - " + quantity + ", A - J, 1-10 \n две строки цифры x y через пробел");
-			String inpLine = scanner.nextLine().replace(" ", "");
-			String inpLine1 = scanner.nextLine().replace(" ", "");
-			coord[0] = Integer.parseInt(String.valueOf(inpLine.charAt(0)));
-			coord[1] = Integer.parseInt(String.valueOf(inpLine.charAt(1)));
-			coord[2] = Integer.parseInt(String.valueOf(inpLine1.charAt(0)));
-			coord[3] = Integer.parseInt(String.valueOf(inpLine1.charAt(1)));
-			boolean res = false;
-			res = Game.checkCoord(coord);
-			if (res) {
-				game.initShipS(coord[0], coord[1], coord[2], coord[3]);
-			}
+			while (true) {
+				if (name == "AircraftCarrier") name = "Aircraft Carrier";
+				System.out.println("Enter the coordinates of the " + name + "(" + quantity + " cells):");
+				String inpLine = scanner.nextLine().replace(" ", "");
 
+				String words = Game.getCoordinatesWords(inpLine);
+				String[] digits = Game.getCoordinatesDigits(inpLine);
+
+				coord[0] = game.StrToIntCoor(words.charAt(0));
+				coord[1] = Integer.parseInt(digits[0]);
+				coord[2] = game.StrToIntCoor(words.charAt(1));
+				coord[3] = Integer.parseInt(digits[1]);
+
+
+				res = game.checkCoord(coord, quantity);
+				res1 = game.buzOrFree(coord[0], coord[1], coord[2], coord[3]);
+
+				if (coord[0] == 100 || coord[2] == 100) continue;
+
+				if (res && res1) {
+					game.initShipS(name, quantity, coord[0], coord[1], coord[2], coord[3]);
+
+					game.gridPrint(Game.grid);
+					game.gridPrint(Game.gridBuzzy);
+					break;
+
+				}
+			}
 		} catch (Exception e) {
-			System.out.println("Exception " + e.getMessage() + "\n");
+			System.out.println("Error. Exception " + e.getMessage() + "\n");
+			id = id - 1;
 		}
 		return coord;
 	}
 
-//	static boolean checkCoord(char[] coord) {
-//		boolean res = false;
-//		return res;
-//	}
-
-	public void shoot() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Shoot A-J, 1-10");
-//		while (sc.hasNext()) {
-//			String move1 = sc.nextLine().replace(" ", "");
-//			try {
-//				int x = Integer.parseInt(String.valueOf(move1.charAt(0)));
-//				int y = Integer.parseInt(String.valueOf(move1.charAt(1)));
-//				boolean res = grid.stepX(x, y);
-//				if (res) {
-//					grid.print();
-//					answer = grid.check();
-//					break;
-//				}
-//
-//			} catch (Exception e) {
-//				System.out.println("Exception " + e.getMessage() + "\n");
-//			}
-	}
-
 }
+
+

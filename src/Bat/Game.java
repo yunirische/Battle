@@ -1,12 +1,14 @@
 package Bat;
 
-import static Bat.Main.inputBoat;
+import static Bat.Main.game;
 import static Bat.Main.ship;
 
 public class Game {
 
-	char[][] grid = new char[10][10];
-	char[][] gridBuzzy = new char[10][10];
+	static char[][] grid = new char[10][10];
+	static char[][] gridBuzzy = new char[10][10];
+	public Ship[] ships = new Ship[5];
+	public int index = 0;
 
 	public void gridInit() {
 		for (int i = 0; i < 10; i++) {
@@ -17,71 +19,106 @@ public class Game {
 		}
 	}
 
-	Ship aircraftCarrier = new Ship("aircraftCarrier",5);
-	Ship battleship = new Ship("battleship",4);
-	Ship submarine = new Ship("submarine",3);
-	Ship cruiser = new Ship("cruiser",3);
-	Ship destroyer = new Ship("destroyer",2);
-
-
-	public void initShipS(int x,int y, int x1, int y1) {
-
-		//int[] coord = inputBoat("AircraftCarrier", aircraftCarrier.quantity);
-		ship.shipInit(x, y, x1, y1, gridBuzzy);
-		ship.merge(grid, aircraftCarrier.ship);
-		gridPrint();
-
-		//int[] coord1 = inputBoat("Battleship", battleship.quantity);
-		//battleship.shipInit(coord1[0], coord1[1], coord1[2], coord1[3], gridBuzzy);
-//		battleship.merge(grid, battleship.ship);
-		//gridPrint();
-
-		//int[] coord2 = inputBoat("Submarine", submarine.quantity);
-		//submarine.shipInit(coord2[0], coord2[1], coord2[2], coord2[3], gridBuzzy);
-//		submarine.merge(grid, submarine.ship);
-		//gridPrint();
-
-		//int[] coord3 = inputBoat("Cruiser", cruiser.quantity);
-		//cruiser.shipInit(coord3[0], coord3[1], coord3[2], coord3[3], gridBuzzy);
-//		cruiser.merge(grid, cruiser.ship);
-		//gridPrint();
-
-		//int[] coord4 = inputBoat("Destroyer", destroyer.quantity);
-		//destroyer.shipInit(coord4[0], coord4[1], coord4[2], coord4[3], gridBuzzy);
-//		destroyer.merge(grid, destroyer.ship);
-		//gridPrint();
-
-	}
-
-	public void gridPrint() {
-		System.out.println("  1 2 3 4 5 6 7 8 9 10");
-		System.out.println("  ____________________");
-		String str = ("ABCDEFGHIJ");
-		for (int i = 0; i < 10; i++) {
-			System.out.print(String.valueOf(str.charAt(i)) + "|");
-			for (int j = 0; j < 10; j++) {
-				System.out.print(" " + grid[i][j]);
+	public Ship getShip(String name) {
+		Ship res = null;
+		for (int i = 0; i < this.ships.length; i++) {
+			if (this.ships[i].name == name) {
+				return this.ships[i];
 			}
-			System.out.println();
 		}
-	}
-
-	public void setGridBuzzyPrint() { // Для проверки сетки занято, затем удалить этот метод
-		System.out.println("\nЗанятые поля");
-		System.out.println("  1 2 3 4 5 6 7 8 9 10");
-		System.out.println("  ____________________");
-		String str = ("ABCDEFGHIJ");
-		for (int i = 0; i < 10; i++) {
-			System.out.print(String.valueOf(str.charAt(i)) + "|");
-			for (int j = 0; j < 10; j++) {
-				System.out.print(" " + gridBuzzy[i][j]);
-			}
-			System.out.println();
-		}
-	}
-
-	static boolean checkCoord(int[] coord) {
-		boolean res = false;
 		return res;
 	}
+
+	public void initShipS(String name, int quantity, int x, int y, int x1, int y1) {
+
+		ships[index] = new Ship(name, quantity, x, y, x1, y1);
+		grid = ships[index].shipInit(x, y, x1, y1, gridBuzzy, grid);
+
+		index++;
+
+	}
+
+	public void gridPrint(char[][] gridX) {
+		System.out.println("   1 2 3 4 5 6 7 8 9 10");
+//		System.out.println("  ____________________");
+		String str = ("ABCDEFGHIJ");
+		for (int i = 0; i < 10; i++) {
+			System.out.print(String.valueOf(str.charAt(i)));
+			for (int j = 0; j < 10; j++) {
+				System.out.print(" " + gridX[i][j]);
+			}
+			System.out.println();
+		}
+	}
+
+	static boolean checkCoord(int[] coord, int quantity) {
+		if (coord[0] >= 0 && coord[0] < 10 && coord[2] >= 0 && coord[2] < 10 && coord[1] >= 1 && coord[1] <= 10 && coord[3] >= 1 && coord[3] <= 10) {
+			if (coord[0] == coord[2] && coord[3] - coord[1] + 1 == quantity) {
+				coord[0] += 1;
+				coord[2] += 1;
+				return true;
+			}
+			//else System.out.println("Error! Wrong length of the Submarine! Try again:");
+			if (coord[1] == coord[3] && coord[2] - coord[0] + 1 == quantity) {
+				coord[0] += 1;
+				coord[2] += 1;
+				return true;
+			} else {
+				System.out.println("Error! Wrong length of the Submarine! Try again:");
+				return false;
+			}
+		}
+		System.out.println("Error! You placed it too close to another one. Try again:");
+		return false;
+	}
+
+	public int StrToIntCoor(char x) {
+		for (int i = 0; i < 10; i++) {
+			if (x == ("ABCDEFGHIJ").charAt(i)) {
+				return i;
+			}
+		}
+		return 100;
+	}
+
+	public boolean buzOrFree(int x, int y, int x1, int y1) {
+		char tmp;
+		if (x == x1) {
+			for (int i = y; i <= y1; i++) {
+				if (gridBuzzy[x - 1][i - 1] == 'p') {
+					System.out.println("Error! Wrong ship location! Try again:");
+					return false;
+				}
+			}
+		}
+		if (y == y1) {
+			for (int i = x; i <= x1; i++) {
+				if (gridBuzzy[i - 1][y - 1] == 'p') {
+					System.out.println("Error! Wrong ship location! Try again:");
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	public static String getCoordinatesWords(String str) {
+
+		String strDigit = str.replaceAll("[0-9]", "");
+		strDigit = strDigit.replaceAll("\\s+", " ");
+		//System.out.println(strDigit + "\n");
+		return strDigit;
+	}
+
+	public static String[] getCoordinatesDigits(String str) {
+
+		String strWords = str.replaceAll("[A-Za-z]", " ");
+		System.out.println(strWords);
+		strWords = strWords.replaceAll("\\s+", " ").trim();
+		System.out.println(strWords);
+		String[] arr = strWords.split("\\s");
+		return arr;
+	}
 }
+

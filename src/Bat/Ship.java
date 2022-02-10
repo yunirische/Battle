@@ -2,59 +2,46 @@ package Bat;
 
 public class Ship {
 	String name;
+	public int[][] ship = new int[10][10];
 	final int quantity; // количество труб
 	private int state; // статус просто цифра = труб, сравниваем м/у 0 и quantity
-	char[][] ship = new char[10][10]; // пустая сетка с расположением коробля для консоли
+	int[] cor;
 
-	Ship(String name, int quantity) {
+	Ship(String name, int quantity, int x, int y, int x1, int y1) {
 		this.quantity = quantity;
 		this.state = quantity;
 		this.name = name;
+		cor = new int[]{x, y, x1, y1};
 	}
 
-	void shipInit(int x, int y, int x1, int y1, char[][] gridBuzzy) { //заполняем по сетке 10х10 корабль по месту без проверок
-		this.name = name;
-		if (x == x1) {
+
+	char[][] shipInit(int x, int y, int x1, int y1, char[][] gridBuzzy, char[][] grid) { //заполняем по сетке 10х10 корабль по месту без проверок
+		if (x == x1 && (y1 - y + 1) == quantity) {
 			for (int i = y; i <= y1; i++) {
+				grid[x - 1][i - 1] = 'O';
 				ship[x - 1][i - 1] = 'O';
-			}
-		}
-		if (y == y1) {
-			for (int j = x; j <= x1; j++) {
-				ship[j - 1][y - 1] = 'O';
-			}
-		}
-		for (int i = x - 2; i <= x1; i++) {
-			for (int j = y - 2; j <= y1; j++) {
-				if (i >= 0 && j >= 0 && i <= 9 && j <= 9) gridBuzzy[i][j] = 'o';
-			}
-		}
-	}
-
-	public void shipPrint() { // Сначала в проверках использовался потом удалить нахер не нужен
-		System.out.println("  1 2 3 4 5 6 7 8 9 10");
-		System.out.println("  ____________________");
-		String str = ("ABCDEFGHIJ");
-		for (int i = 0; i < 10; i++) {
-			System.out.print(String.valueOf(str.charAt(i)) + "|");
-			for (int j = 0; j < 10; j++) {
-				System.out.print(" " + ship[i][j]);
-			}
-			System.out.println();
-		}
-	}
-
-	public char[][] merge(char[][] grid, char[][] ship) {
-		//System.out.println("Совмещаем сетку и корабль");
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				if (ship[i][j] == 'O') {
-					grid[i][j] = 'O';
+				for (int n = x - 2; n <= x1; n++) {
+					for (int j = y - 2; j <= y1; j++) {
+						if (n >= 0 && j >= 0 && n <= 9 && j <= 9) gridBuzzy[n][j] = 'p';
+					}
 				}
 			}
 		}
+		if (y == y1 && (x1 - x + 1) == quantity) {
+			for (int j = x; j <= x1; j++) {
+				grid[j - 1][y - 1] = 'O';
+				ship[j - 1][y - 1] = 'O';
+				for (int i = x - 2; i <= x1; i++) {
+					for (int n = y - 2; n <= y1; n++) {
+						if (i >= 0 && n >= 0 && i <= 9 && n <= 9) gridBuzzy[i][n] = 'p';
+					}
+				}
+			}
+		}
+
 		return grid;
 	}
+
 }
 
 
