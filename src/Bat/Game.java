@@ -1,20 +1,24 @@
 package Bat;
 
-import static Bat.Main.game;
-import static Bat.Main.ship;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+
+import static Bat.Main.*;
 
 public class Game {
 
 	static char[][] grid = new char[10][10];
+	static char[][] fog = new char[10][10];
 	static char[][] gridBuzzy = new char[10][10];
 	public Ship[] ships = new Ship[5];
-	public int index = 0;
+	int index = 0;
+
 
 	public void gridInit() {
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				grid[i][j] = '~';
 				gridBuzzy[i][j] = '~';
+				fog[i][j] = '~';
 			}
 		}
 	}
@@ -39,7 +43,7 @@ public class Game {
 	}
 
 	public void gridPrint(char[][] gridX) {
-		System.out.println("   1 2 3 4 5 6 7 8 9 10");
+		System.out.println("  1 2 3 4 5 6 7 8 9 10");
 //		System.out.println("  ____________________");
 		String str = ("ABCDEFGHIJ");
 		for (int i = 0; i < 10; i++) {
@@ -49,6 +53,20 @@ public class Game {
 			}
 			System.out.println();
 		}
+		System.out.println();
+	}
+
+	public void fogPrint(char[][] gridX) {
+		System.out.println("   1 2 3 4 5 6 7 8 9 10");
+		String str = ("ABCDEFGHIJ");
+		for (int i = 0; i < 10; i++) {
+			System.out.print(String.valueOf(str.charAt(i)));
+			for (int j = 0; j < 10; j++) {
+				System.out.print(gridX[i][j] == 'O' ? " " + '~' : " " + gridX[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println();
 	}
 
 	static boolean checkCoord(int[] coord, int quantity) {
@@ -107,18 +125,82 @@ public class Game {
 
 		String strDigit = str.replaceAll("[0-9]", "");
 		strDigit = strDigit.replaceAll("\\s+", " ");
-		//System.out.println(strDigit + "\n");
 		return strDigit;
 	}
 
 	public static String[] getCoordinatesDigits(String str) {
 
 		String strWords = str.replaceAll("[A-Za-z]", " ");
-		System.out.println(strWords);
 		strWords = strWords.replaceAll("\\s+", " ").trim();
-		System.out.println(strWords);
 		String[] arr = strWords.split("\\s");
 		return arr;
+	}
+
+	static boolean checkCoordShoot(int[] coordShoot) {
+		int x = coordShoot[0];
+		int y = coordShoot[1];
+		if (x >= 0 && x < 10 && y >= 0 && y < 10) {
+			return true;
+		}
+		System.out.println("Error! You entered the wrong coordinates! Try again:");
+		return false;
+	}
+
+	public void shootGrid(int[] coord) {
+		int x = coord[0];
+		int y = coord[1];
+		if (grid[x][y] == 'O') {
+			grid[x][y] = 'X';
+			whtsHpnd(x, y);
+			fogPrint(grid);
+			if (!endOfGame(countBoat)) {
+				System.out.println("You hit a ship!");
+			}
+		} else {
+			grid[x][y] = 'M';
+			fogPrint(grid);
+			System.out.println("You missed!");
+		}
+
+	}
+
+	public void whtsHpnd(int x, int y) {
+		boolean r = false;
+		for (int i = 0; i < ships.length; i++) {
+			if (ships[i].ship[x][y] == 'O' && ships[i].ship[x][y] == 'X') {
+				ships[i].ship[x][y] = 'X';
+				System.out.println(countBoat);
+				r = ships[i].checkState();
+				if (r) {
+					System.out.println("You sank a ship! Specify a new target:");
+					countBoat--;
+					if (countBoat == 0) break;
+				}
+
+			}
+		}
+	}
+
+	public String gameProcess() {
+		String itog = new String("Congrat");
+		fogPrint(grid);
+
+		while (true) {
+			if (countBoat == 0) {
+				System.out.println("You sank the last ship. You won. Congratulations!");
+				break;
+			}
+			shot();
+		}
+		return itog;
+	}
+
+	public boolean endOfGame(int countBoat) {
+		boolean end = false;
+		if (countBoat != 0) {
+			return false;
+		}
+		return true;
 	}
 }
 

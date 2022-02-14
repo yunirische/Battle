@@ -1,10 +1,10 @@
 package Bat;
 
 public class Ship {
-	String name;
-	public int[][] ship = new int[10][10];
+	public String name;
+	public char[][] ship = new char[10][10];
 	final int quantity; // количество труб
-	private int state; // статус просто цифра = труб, сравниваем м/у 0 и quantity
+	public int state; // статус просто цифра = труб, сравниваем м/у 0 и quantity
 	int[] cor;
 
 	Ship(String name, int quantity, int x, int y, int x1, int y1) {
@@ -14,6 +14,13 @@ public class Ship {
 		cor = new int[]{x, y, x1, y1};
 	}
 
+	public boolean checkState() {
+		this.state--;
+		if (state == 0) {
+			return true;
+		}
+		return false;
+	}
 
 	char[][] shipInit(int x, int y, int x1, int y1, char[][] gridBuzzy, char[][] grid) { //заполняем по сетке 10х10 корабль по месту без проверок
 		if (x == x1 && (y1 - y + 1) == quantity) {
@@ -43,5 +50,3 @@ public class Ship {
 	}
 
 }
-
-
