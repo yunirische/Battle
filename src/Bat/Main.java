@@ -84,7 +84,6 @@ public class Main {
 					break;
 				}
 				System.out.println("Take a shot!");
-				System.out.println("countBoat - " + countBoat);
 				String inpLineShot = scanner.nextLine().replace(" ", "");
 
 				String words = Game.getCoordinatesWords(inpLineShot);
@@ -92,7 +91,6 @@ public class Main {
 
 				coordShoot[0] = game.StrToIntCoor(words.charAt(0));
 				coordShoot[1] = Integer.parseInt(digits[0]) - 1;
-
 				res = game.checkCoordShoot(coordShoot);
 
 				if (res) {

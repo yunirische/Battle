@@ -6,9 +6,9 @@ import static Bat.Main.*;
 
 public class Game {
 
-	static char[][] grid = new char[10][10];
-	static char[][] fog = new char[10][10];
-	static char[][] gridBuzzy = new char[10][10];
+	char[][] grid = new char[10][10];
+	char[][] fog = new char[10][10];
+	char[][] gridBuzzy = new char[10][10];
 	public Ship[] ships = new Ship[5];
 	int index = 0;
 
@@ -149,42 +149,31 @@ public class Game {
 	public void shootGrid(int[] coord) {
 		int x = coord[0];
 		int y = coord[1];
-		if (grid[x][y] == 'O') {
+		if (grid[x][y] == 'O' || grid[x][y] == 'X') {
 			grid[x][y] = 'X';
+
 			whtsHpnd(x, y);
 			fogPrint(grid);
-			if (!endOfGame(countBoat)) {
-				System.out.println("You hit a ship!");
-			}
+//			if (!endOfGame(countBoat)) {
+//				System.out.println("You hit a ship! // in shootGrid // if/ !endOfGame");
+//			}
 		} else {
 			grid[x][y] = 'M';
 			fogPrint(grid);
 			System.out.println("You missed!");
 		}
-
 	}
 
 	public void whtsHpnd(int x, int y) {
 		boolean r = false;
 		for (int i = 0; i < ships.length; i++) {
-			if (ships[i].ship[x][y] == 'O' && ships[i].ship[x][y] == 'X') {
-				ships[i].ship[x][y] = 'X';
-				System.out.println(countBoat);
-				r = ships[i].checkState();
-				if (r) {
-					System.out.println("You sank a ship! Specify a new target:");
-					countBoat--;
-					if (countBoat == 0) break;
-				}
-
-			}
+			ships[i].whtsHpndShip (x, y);
 		}
 	}
 
 	public String gameProcess() {
 		String itog = new String("Congrat");
 		fogPrint(grid);
-
 		while (true) {
 			if (countBoat == 0) {
 				System.out.println("You sank the last ship. You won. Congratulations!");

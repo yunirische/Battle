@@ -1,5 +1,7 @@
 package Bat;
 
+import static Bat.Main.countBoat;
+
 public class Ship {
 	public String name;
 	public char[][] ship = new char[10][10];
@@ -49,4 +51,16 @@ public class Ship {
 		return grid;
 	}
 
+	public void whtsHpndShip(int x, int y) {
+		boolean r = false;
+		if (ship[x][y] == 'O' || ship[x][y] == 'X') {
+			ship[x][y] = 'X';
+			r = checkState();
+			if (r) {
+				System.out.println("You sank a ship! Specify a new target:");
+				countBoat--;
+				if (countBoat == 0) System.out.println("if srabotal hz nah");;
+			}
+		}
+	}
 }
