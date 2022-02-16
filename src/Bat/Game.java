@@ -154,9 +154,6 @@ public class Game {
 
 			whtsHpnd(x, y);
 			fogPrint(grid);
-//			if (!endOfGame(countBoat)) {
-//				System.out.println("You hit a ship! // in shootGrid // if/ !endOfGame");
-//			}
 		} else {
 			grid[x][y] = 'M';
 			fogPrint(grid);

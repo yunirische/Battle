@@ -1,14 +1,9 @@
 package Bat;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Scanner;
-
-import static java.util.Collections.replaceAll;
 
 public class Main {
 	static Game game;
-	static Ship ship;
 	static String[] name;
 	static int[] quantity;
 	static int id;
@@ -19,7 +14,7 @@ public class Main {
 		game.gridInit(); // основное рабочее поле
 		game.gridPrint(game.grid);
 
-		name = new String[]{"AircraftCarrier", "battleship", "submarine", "cruiser", "destroyer"};
+		name = new String[]{"Aircraft_Carrier", "battleship", "submarine", "cruiser", "destroyer"};
 		quantity = new int[]{5, 4, 3, 3, 2};
 
 		for (id = 0; id < name.length; id++) {
@@ -31,37 +26,37 @@ public class Main {
 
 	}
 
-	static int[] inputBoat(String name, int quantity) { // вводим координаты, проверяем и инициализируем корабль и сетку с ним
+	static void inputBoat(String name, int quantity) { // вводим координаты, проверяем и инициализируем корабль и сетку с ним
 		Scanner scanner = new Scanner(System.in);
-		int[] coord = new int[4];
-		boolean res = false;
-		boolean res1 = false;
+		int[] coordinates = new int[4];
+		boolean res;
+		boolean res1;
 
 		try {
 			while (true) {
-				if (name == "AircraftCarrier") name = "Aircraft Carrier";
+//				if (name == "AircraftCarrier") name = "Aircraft Carrier";
 				System.out.println("Enter the coordinates of the " + name + "(" + quantity + " cells):");
 				String inpLine = scanner.nextLine().replace(" ", "");
 
 				String words = Game.getCoordinatesWords(inpLine);
 				String[] digits = Game.getCoordinatesDigits(inpLine);
 
-				coord[0] = game.StrToIntCoor(words.charAt(0));
-				coord[1] = Integer.parseInt(digits[0]);
-				coord[2] = game.StrToIntCoor(words.charAt(1));
-				coord[3] = Integer.parseInt(digits[1]);
+				coordinates[0] = game.StrToIntCoor(words.charAt(0));
+				coordinates[1] = Integer.parseInt(digits[0]);
+				coordinates[2] = game.StrToIntCoor(words.charAt(1));
+				coordinates[3] = Integer.parseInt(digits[1]);
 
-				if (coord[1] > coord[3]) {
-					int tmp = coord[1];
-					coord[1] = coord[3];
-					coord[3] = tmp;
+				if (coordinates[1] > coordinates[3]) {
+					int tmp = coordinates[1];
+					coordinates[1] = coordinates[3];
+					coordinates[3] = tmp;
 				}
-				res = game.checkCoord(coord, quantity);
-				res1 = game.buzOrFree(coord[0], coord[1], coord[2], coord[3]);
+				res = Game.checkCoord(coordinates, quantity);
+				res1 = game.buzOrFree(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
 
-				if (coord[0] == 100 || coord[2] == 100) continue;
+				if (coordinates[0] == 100 || coordinates[2] == 100) continue;
 				if (res && res1) {
-					game.initShipS(name, quantity, coord[0], coord[1], coord[2], coord[3]);
+					game.initShipS(name, quantity, coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
 					game.gridPrint(game.grid);
 					break;
 				}
@@ -70,13 +65,11 @@ public class Main {
 			System.out.println("Error. Exception " + e.getMessage() + "\n");
 			id = id - 1;
 		}
-		return coord;
 	}
-	public static String shot() {
+	public static void shot() {
 		Scanner scanner = new Scanner(System.in);
-		int[] coordShoot = new int[2];
-		boolean res = false;
-		String result = new String("XXX");
+		int[] coordinateShoot = new int[2];
+		boolean res;
 		try {
 			while (true) {
 				if (countBoat == 0) {
@@ -89,18 +82,17 @@ public class Main {
 				String words = Game.getCoordinatesWords(inpLineShot);
 				String[] digits = Game.getCoordinatesDigits(inpLineShot);
 
-				coordShoot[0] = game.StrToIntCoor(words.charAt(0));
-				coordShoot[1] = Integer.parseInt(digits[0]) - 1;
-				res = game.checkCoordShoot(coordShoot);
+				coordinateShoot[0] = game.StrToIntCoor(words.charAt(0));
+				coordinateShoot[1] = Integer.parseInt(digits[0]) - 1;
+				res = Game.checkCoordShoot(coordinateShoot);
 
 				if (res) {
-					game.shootGrid(coordShoot);
-					return "XXX";
+					game.shootGrid(coordinateShoot);
+//					return;
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("Error. Exception " + e.getMessage() + "\n");
 		}
-		return result;
 	}
 }

@@ -59,7 +59,6 @@ public class Ship {
 			if (r) {
 				System.out.println("You sank a ship! Specify a new target:");
 				countBoat--;
-				if (countBoat == 0) System.out.println("if srabotal hz nah");;
 			}
 		}
 	}
